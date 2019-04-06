@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
 import logger from 'redux-logger';
-import registerServiceWorker from './registerServiceWorker';
+
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import {Provider} from 'react-redux';
 
 const feedback={
     feeling:'',
@@ -38,5 +39,9 @@ const storeInstance= createStore(
     }),
     applyMiddleware(logger)
 )
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+    <Provider store={storeInstance}>
+        <App />
+    </Provider>,
+    document.getElementById('root'));
+
