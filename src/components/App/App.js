@@ -10,7 +10,7 @@ class App extends Component {
         <div className="App">
           <Route exact Path="/" component={Feeling} />
           <Route exact Path="/understanding" component={Understanding} />
-          <Route exact Path="/Support" component={Supported} />
+          <Route exact Path="/Support" component={Support,} />
           <Route exact Path="/comments" component={Comments} />
           <Route exact Path="/review" component={FeedbackReview} />
           <Route exact Path="admin" component={Admin} />
