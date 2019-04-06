@@ -8,6 +8,7 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import blue from "@material-ui/core/colors/blue";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
 
 import Radio from "@material-ui/core/Radio";
 
@@ -136,13 +137,28 @@ export class Feeling extends Component {
     );
   }
 }
+
+const styles=theme =>({
+  button:{
+    margin: theme.spacing.unit,
+  },
+  cssRoot:{
+    backgroundColor: blue[500],
+  },
+  FormControl :{
+    margin: theme.spacing.unit,
+    width : 600,
+    height: 50,
+
+  },
+});
 const theme = createMuiTheme({
   palette: {
-    primary: blue
+    primary:{ main:blue[500]},
   },
   typography: {
     // In Japanese the characters are usually larger.
-    fontSize: 22
+   // useNextVariants= true,
   }
 });
-export default connect()(Feeling);
+export default withStyles(styles) (connect()(Feeling));
