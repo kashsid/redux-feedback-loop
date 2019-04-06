@@ -1,26 +1,40 @@
-import React, { Component } from 'react'
-import Header from '../Header/Header';
+import React, { Component } from "react";
+import Header from "../Header/Header";
 import Button from "@material-ui/core/Button";
-//import { withStyles} from "@material-ui/core/styles";
-import { FormControl } from '@material-ui/core';
+import { FormControl } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { createMuiTheme } from "@material-ui/core/styles";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import blue from "@material-ui/core/colors/blue";
 import RadioGroup from "@material-ui/core/RadioGroup";
-//import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+
 import Radio from "@material-ui/core/Radio";
-//import RadioGroup from "@material-ui/core/RadioGroup";
-//import FormHelperText from "@material-ui/core/FormHelperText";
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-//import FormControl from "@material-ui/core/FormControl";
-//import FormLabel from "@material-ui/core/FormLabel";
 
 export class Feeling extends Component {
-  state ={
-    value:'',
-  }
+  state = {
+    value: ""
+  };
+
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
+  
+
+  handleClick = () => {
+    //  sending feedback on feelings to  reducer
+    const action = {
+      type: "SET_FEEDBACK_FEELING",
+      payload: this.state.value
+    };
+    this.props.dispatch(action);
+
+    // route to understanding
+    this.props.history.push("/understanding");
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -35,43 +49,85 @@ export class Feeling extends Component {
                   aria-label="position"
                   name="position"
                   value={this.state.value}
-                  onChange={this.HandleChange}
+                  onChange={this.handleChange}
                   row
                 >
-                  <i className="material-icons">
-                    sentiment_very_satisfied
-                  </i>
+                  <i className="material-icons" />
                   <FormControlLabel
                     value="1"
                     control={<Radio color="primary" />}
-                    label={<Typography style={{ fontSize: '1.1rem',color:'8a8989'}}>1</Typography> }
+                    label={
+                      <Typography
+                        style={{ fontSize: "1.1rem", color: "8a8989" }}
+                      >
+                        1
+                      </Typography>
+                    }
                     labelPlacement="bottom"
                   />
                   <FormControlLabel
                     value="2"
                     control={<Radio color="primary" />}
-                    label={<Typography style={{ fontSize: '1.1rem', color: '8a8989' }}>2</Typography>}
+                    label={
+                      <Typography
+                        style={{ fontSize: "1.1rem", color: "8a8989" }}
+                      >
+                        2
+                      </Typography>
+                    }
                     labelPlacement="bottom"
                   />
                   <FormControlLabel
                     value="3"
                     control={<Radio color="primary" />}
-                    label={<Typography style={{ fontSize: '1.1rem', color: '8a8989' }}>3</Typography>}
+                    label={
+                      <Typography
+                        style={{ fontSize: "1.1rem", color: "8a8989" }}
+                      >
+                        3
+                      </Typography>
+                    }
                     labelPlacement="bottom"
                   />
                   <FormControlLabel
                     value="4"
                     control={<Radio color="primary" />}
-                    label={<Typography style={{ fontSize: '1.1rem', color: '8a8989' }}>4</Typography>}
+                    label={
+                      <Typography
+                        style={{ fontSize: "1.1rem", color: "8a8989" }}
+                      >
+                        4
+                      </Typography>
+                    }
                     labelPlacement="bottom"
                   />
                   <FormControlLabel
                     value="5"
                     control={<Radio color="primary" />}
-                    label={<Typography style={{ fontSize: '1.1rem', color: '8a8989' }}>5</Typography>}
+                    label={
+                      <Typography
+                        style={{ fontSize: "1.1rem", color: "8a8989" }}
+                      >
+                        5
+                      </Typography>
+                    }
                     labelPlacement="bottom"
                   />
+                  <i class="material-icons" />
                 </RadioGroup>
+                <div className="button-div">
+                  <Button
+                    onClick={this.handleClick}
+                    type="submit"
+                    value="submit"
+                    style={{ fontSize: "14px", marginTop: "30px" }}
+                    size="medium"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Next
+                  </Button>
+                </div>
               </div>
             </FormControl>
           </div>
@@ -89,4 +145,4 @@ const theme = createMuiTheme({
     fontSize: 22
   }
 });
-export default Feeling
+export default connect()(Feeling);

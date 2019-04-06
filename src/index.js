@@ -20,6 +20,7 @@ const FeedbackReducer= (state= feedback,action)=>{
     switch (action.type) {
         case 'SET_FEEDBACK_FEELING':
             return {...state,feeling: action.payload}
+            console.log('state', state);
         case 'SET_FEEDBACK_UNDERSTANDING':
             return { ...state, understanding: action.payload }
         case 'SET_FEEDBACK_SUPPORT':
@@ -30,12 +31,16 @@ const FeedbackReducer= (state= feedback,action)=>{
             break;
     }
     return state;
+    
+    
 }
 
 // creating redux store
 const storeInstance= createStore(
     combineReducers({
         FeedbackReducer
+      
+        
     }),
     applyMiddleware(logger)
 )
